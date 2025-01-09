@@ -1,0 +1,12 @@
+# Changes here will be overwritten by Copier; NEVER EDIT MANUALLY
+_commit: 2024.08.19
+_src_path: gh:scientific-python/cookie
+backend: hatch
+email: js7501@princeton.edu
+full_name: James Sunseri
+license: BSD
+org: James11222
+project_name: glasz
+project_short_description: 'A python package for joint kSZ+GGL analysis modeling. '
+url: https://github.com/James11222/glasz
+vcs: true
