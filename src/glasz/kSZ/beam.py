@@ -15,7 +15,7 @@ def beam_transform_to_profile(
     B_ell: NDArray[np.float64], theta: NDArray[np.float64], normalize: bool = False
 ) -> NDArray[np.float64]:
     """
-    Given the transform $B(\ell)$ of a beam, evaluate its real space angular profile
+    Given the transform B(ell) of a beam, evaluate its real space angular profile
     at a given an angle theta in radians. This code is adapted from the pixell
     library under the utils.py module (https://pixell.readthedocs.io/en/latest/readme.html).
 

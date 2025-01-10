@@ -16,7 +16,7 @@ def project_density_profile(
     rho_3D: Callable[
         [NDArray[np.float64] | np.float64], NDArray[np.float64] | np.float64
     ],
-    d_A: np.float64,
+    d_A: float,
     los_distance: NDArray[np.float64],
     theta_smooth: NDArray[np.float64],
 ) -> NDArray[np.float64]:
@@ -24,7 +24,7 @@ def project_density_profile(
     A function which takes in a 3D density profile and projects it into a 2D density profile by
     integrating along the line of sight.
 
-    $\rho_{2D} = \int_{rm LOS} \rho(\sqrt{l^2 + d_A(z)^2 |theta|^2}) dl$
+    rho_{2D} = int_{rm LOS} rho(sqrt{l^2 + d_A(z)^2 |theta|^2}) dl
 
     Args:
         rho_3D: (`float` or `NDArray[float]`): 3D density profile [Msun/Mpc^3]
@@ -183,8 +183,8 @@ def compute_T_kSZ(
 
 @np.vectorize
 def create_T_kSZ_profile(
-    theta: np.float64,
-    z: np.float64,
+    theta: float,
+    z: float,
     rho_3D: Callable[
         [NDArray[np.float64] | np.float64], NDArray[np.float64] | np.float64
     ],
@@ -199,20 +199,20 @@ def create_T_kSZ_profile(
     it into an observable T_kSZ profile which we can compare to kSZ measurements.
     The function can be broken down into three steps:
 
-    1. Compute the projected density profile $\rho(r_\perp)$ by integrating the 3D density
-    profile $\rho(r)$ along the line of sight.
+    1. Compute the projected density profile rho(r_perp) by integrating the 3D density
+    profile rho(r) along the line of sight.
 
     2. Convolve the projected 2D density profile with the beam profile.
 
-    3. Compute the average $T_{\rm kSZ}$ within disks of varying radii theta_d and subtract off
-    the mean $T_{\rm kSZ}$ of an adjacent annulus of external radius $\sqrt{2}*\theta_{\rm d}$ with equal area.
+    3. Compute the average T_{rm kSZ} within disks of varying radii theta_d and subtract off
+    the mean T_{rm kSZ} of an adjacent annulus of external radius sqrt{2}*theta_{rm d} with equal area.
 
-    In the end we are left with $T_{\rm kSZ}(\theta_{\rm d})$ which is the observable $T_{\rm kSZ}$ profile.
+    In the end we are left with T_{rm kSZ}(theta_{rm d}) which is the observable T_{rm kSZ} profile.
 
     Args:
         theta: (`float` or `NDArray[float]`): angular radius [arcmin]
         z: (`float`): redshift
-        rho_3D: (`callable`): 3D density profile (assume radial only) [$M_\odot/\mathrm{Mpc}^3$]
+        rho_3D: (`callable`): 3D density profile (assume radial only) [M_odot/mathrm{Mpc}^3]
         frequency: (`str`): frequency of the beam profile
         cosmo: (`pyccl.cosmology.Cosmology`): a Cosmology object.
         NNR: (`int`): number of radial bins. Default is `NNR = 100`

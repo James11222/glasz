@@ -16,9 +16,9 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter):  # type: ignore[misc]
     (https://arxiv.org/pdf/astro-ph/9509122). The profile is
     defined as:
 
-    $$\rho_{\rm GNFW}(r) = \rho_0 \left(\frac{x}{x_c}\right)^{-\gamma} \left( 1 + \left( \frac{x}{x_c} \right)^{1/\alpha} \right)^{-(\beta - \gamma) \alpha}$$
+    rho_{rm GNFW}(r) = rho_0 left(frac{x}{x_c}right)^{-gamma} left( 1 + left( frac{x}{x_c} right)^{1/alpha} right)^{-(beta - gamma) alpha}
 
-    where $x = r/r_{200c}$, $r_{200c}$ is the comoving 200c radius. The profile can be
+    where x = r/r_{200c}, r_{200c} is the comoving 200c radius. The profile can be
     truncated according to whatever mass definition is used. The profile can also be
     normalized to enforce cosmic baryon abundance at a given radius.
     """
@@ -75,9 +75,9 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter):  # type: ignore[misc]
         n_steps: int = 1000,
     ) -> None:
         """
-        compute the value of $\rho_0$ for the GNFW profile by
-        enforcing a sphere of radius $r_b$ to have cosmic abundance of
-        baryons. Assigns a new value of $\rho_0$ to the object.
+        compute the value of rho_0 for the GNFW profile by
+        enforcing a sphere of radius r_b to have cosmic abundance of
+        baryons. Assigns a new value of rho_0 to the object.
 
         Args:
             cosmo: (`pyccl.cosmology.Cosmology`): a Cosmology object.
