@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import numpy as np
-import pyccl as ccl
+import pyccl as ccl  # type: ignore[import-untyped]
 
 import glasz
 
-from .init_halo_model import (
+from .test_init_halo_model import (  # type: ignore[import-untyped]
     a_sf,
     all_param_defaults,
     bM,
@@ -17,13 +17,14 @@ from .init_halo_model import (
     xi_mm_2h,
     z_lens,
 )
-from .utils import compute_kSZ
+from .test_utils import compute_kSZ  # type: ignore[import-untyped]
 
 
 def test_import():
     import glasz
 
     assert glasz.__version__ is not None
+
 
 param_dict = all_param_defaults
 
@@ -42,9 +43,9 @@ def test_full_pipeline():
     prof_baryons = glasz.profiles.HaloProfileGNFW(
         hmd,
         rho0=1.0,
-        alpha=param_dict["α"],
-        beta=param_dict["β"],
-        gamma=param_dict["γ"],
+        alpha=param_dict["alpha"],
+        beta=param_dict["beta"],
+        gamma=param_dict["gamma"],
         x_c=param_dict["x_c"],
     )
 
@@ -52,8 +53,12 @@ def test_full_pipeline():
 
     # COMPUTE 3D DENSITY PROFILES
     def rho_2h(r):
-        return (xi_mm_2h(r) * bM(cosmo, 10 ** param_dict["log10_M"], a_sf) * 
-                ccl.rho_x(cosmo, a_sf, "matter", is_comoving=True) * param_dict["A_2h"])
+        return (
+            xi_mm_2h(r)
+            * bM(cosmo, 10 ** param_dict["log10_M"], a_sf)
+            * ccl.rho_x(cosmo, a_sf, "matter", is_comoving=True)
+            * param_dict["A_2h"]
+        )
 
     prof_baryons.rho_2h = rho_2h  # add 2-halo term to baryon profile
 
@@ -87,10 +92,10 @@ def test_full_pipeline():
     )  # convert from Msun/pc^2 to h Msun/pc^2
 
     # COMPUTE kSZ PROFILE
-    def ρ_gas_3D(r):
+    def rho_gas_3D(r):
         return fb * prof_baryons.real(cosmo, r, 10 ** param_dict["log10_M"], a_sf)
 
-    T_kSZ = compute_kSZ(x_kSZ, z_lens, ρ_gas_3D, "f150 - f090", cosmo)
+    T_kSZ = compute_kSZ(x_kSZ, z_lens, rho_gas_3D, "f150 - f090", cosmo)
 
     assert ds_b is not None
     assert ds_dm is not None

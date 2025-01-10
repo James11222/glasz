@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import numpy as np
-import pyccl as ccl
+import pyccl as ccl  # type: ignore[import-untyped]
 
 import glasz
 
-from .init_halo_model import (
+from .test_init_halo_model import (  # type: ignore[import-untyped]
     a_sf,
     all_param_defaults,
     cM_relation,

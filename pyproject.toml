@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling", "hatch-vcs", "numpy"]
+requires = ["hatchling", "hatch-vcs"]
 build-backend = "hatchling.build"
 
 
@@ -136,6 +136,8 @@ ignore = [
   "NPY201",   # numpy > 2.0 not supported
   "F403",     # 'from module import *' used; unable to detect undefined names
   "UP008",    # Super function in classes
+  "RUF001",   # Greek Letters
+  "E731",     # Do not assign a lambda expression, use a def
 ]
 isort.required-imports = ["from __future__ import annotations"]
 # Uncomment if using a _compat.typing backport

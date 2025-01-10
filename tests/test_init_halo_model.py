@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import numpy as np
-import pyccl as ccl
+import pyccl as ccl  # type: ignore[import-untyped]
 
 import glasz
 
@@ -65,9 +65,9 @@ log10_M_default = np.log10(3e13)
 c_default = cM_relation(cosmo, M=10**log10_M_default, a=a_sf)
 
 x_c_default = 0.5
-α_default = 0.88 * ((10**log10_M_default) / 1e14) ** (-0.03) * (1 / a_sf) ** 0.19
-β_default = 3.83 * ((10**log10_M_default) / 1e14) ** 0.04 * (1 / a_sf) ** (-0.025)
-γ_default = 0.2
+alpha_default = 0.88 * ((10**log10_M_default) / 1e14) ** (-0.03) * (1 / a_sf) ** 0.19
+beta_default = 3.83 * ((10**log10_M_default) / 1e14) ** 0.04 * (1 / a_sf) ** (-0.025)
+gamma_default = 0.2
 A_2h_default = 1.0
 
 defaults = [
@@ -76,9 +76,9 @@ defaults = [
     c_default,
     ### GAS parameters ###
     x_c_default,
-    α_default,
-    β_default,
-    γ_default,
+    alpha_default,
+    beta_default,
+    gamma_default,
     A_2h_default,
 ]
 
@@ -88,9 +88,9 @@ param_names = [
     "c",
     ### GAS parameters ###
     "x_c",
-    "α",
-    "β",
-    "γ",
+    "alpha",
+    "beta",
+    "gamma",
     "A_2h",
 ]
 

@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import numpy as np
-import pyccl as ccl
+import pyccl as ccl  # type: ignore[import-untyped]
 
 import glasz
 
-from .init_halo_model import (
+from .test_init_halo_model import (  # type: ignore[import-untyped]
     M_arr,
     a_sf,
     all_param_defaults,
@@ -30,9 +30,9 @@ def test_GNFW_base_1h():
     profile_gas = glasz.profiles.HaloProfileGNFW(
         hmd,
         rho0=1.0,
-        alpha=param_dict["α"],
-        beta=param_dict["β"],
-        gamma=param_dict["γ"],
+        alpha=param_dict["alpha"],
+        beta=param_dict["beta"],
+        gamma=param_dict["gamma"],
         x_c=param_dict["x_c"],
     )
     Rb = 10 * hmd.get_radius(cosmo, 10 ** param_dict["log10_M"], a_sf)
@@ -52,9 +52,9 @@ def test_GNFW_base_1h_truncated():
     profile_gas = glasz.profiles.HaloProfileGNFW(
         hmd,
         rho0=1.0,
-        alpha=param_dict["α"],
-        beta=param_dict["β"],
-        gamma=param_dict["γ"],
+        alpha=param_dict["alpha"],
+        beta=param_dict["beta"],
+        gamma=param_dict["gamma"],
         x_c=param_dict["x_c"],
         truncated=True,
     )
@@ -137,9 +137,9 @@ def test_total_matter_profile():
     prof_baryons = glasz.profiles.HaloProfileGNFW(
         hmd,
         rho0=1.0,
-        alpha=param_dict["α"],
-        beta=param_dict["β"],
-        gamma=param_dict["γ"],
+        alpha=param_dict["alpha"],
+        beta=param_dict["beta"],
+        gamma=param_dict["gamma"],
         x_c=param_dict["x_c"],
     )
 

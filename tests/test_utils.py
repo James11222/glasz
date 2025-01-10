@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-import GLaSZ
+import glasz
 
 
 def compute_kSZ(theta, z_lens, rho, frequency, cosmo):
@@ -20,20 +20,19 @@ def compute_kSZ(theta, z_lens, rho, frequency, cosmo):
     - T_kSZ (array): the kSZ temperature profile in units of [μK * arcmin^2]
     """
     if frequency in ("f150", "f090"):
-        T_kSZ = GLaSZ.kSZ.create_T_kSZ_profile(theta, z_lens, rho, frequency, cosmo)
+        T_kSZ = glasz.kSZ.create_T_kSZ_profile(theta, z_lens, rho, frequency, cosmo)
 
     elif frequency == "f150 - f090":
-        T_kSZ_150 = GLaSZ.kSZ.create_T_kSZ_profile(
+        T_kSZ_150 = glasz.kSZ.create_T_kSZ_profile(
             theta[: len(theta) // 2], z_lens, rho, "f150", cosmo
         )
-        T_kSZ_090 = GLaSZ.kSZ.create_T_kSZ_profile(
+        T_kSZ_090 = glasz.kSZ.create_T_kSZ_profile(
             theta[len(theta) // 2 :], z_lens, rho, "f090", cosmo
         )
         T_kSZ = np.concatenate((T_kSZ_150, T_kSZ_090))
 
     else:
-        raise AssertionError(
-            "Not a valid frequency. Choose from 'f150', 'f090', 'f150 - f090'"
-        )
+        msg = "Not a valid frequency. Choose from 'f150', 'f090', 'f150 - f090'"
+        raise AssertionError(msg)
 
     return T_kSZ
