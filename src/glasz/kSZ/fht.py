@@ -66,10 +66,10 @@ class RadialFourierTransform:
         using self.unpad
 
         Args:
-            rprof: (`NDArray[np.float64]`): A function that takes in an array of radii and returns the radial profile.
+            rprof: (`NDArray[float]`): A function that takes in an array of radii and returns the radial profile.
 
         Returns:
-            lprof: (`NDArray[np.float64]`): The harmonic profile.
+            lprof: (`NDArray[float]`): The harmonic profile.
         """
         return cast(
             NDArray[np.float64],
@@ -89,10 +89,10 @@ class RadialFourierTransform:
         using self.unpad
 
         Args:
-            lprof: (`NDArray[np.float64]`): A function that takes in an array of multipoles and returns the harmonic profile.
+            lprof: (`NDArray[float]`): A function that takes in an array of multipoles and returns the harmonic profile.
 
         Returns:
-            rprof: (`NDArray[np.float64]`): The radial profile.
+            rprof: (`NDArray[float]`): The radial profile.
         """
 
         return cast(
@@ -109,7 +109,7 @@ class RadialFourierTransform:
                 r, l, vals = unpad(r_padded, l_padded, vals_padded)
 
         Args:
-            arrs: (`NDArray[np.float64]`): The array(s) to unpad.
+            arrs: (`NDArray[float]`): The array(s) to unpad.
 
         Returns:
             arrs: (`Any`): The unpadded array(s).

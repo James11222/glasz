@@ -68,7 +68,6 @@ def convolve_density_with_beam(
 
     Returns:
         rho_2D_beam: (`NDArray[float]`): 2D density profile convolved with beam [units of g/cm^2]
-        rho_2D_beam_annulus: (`NDArray[float]`): 2D density profile convolved with beam in annulus [units of g/cm^2]
     """
 
     if method == "brute_force":
@@ -147,7 +146,7 @@ def compute_T_kSZ(
         theta_use: (`NDArray[float]`): angular coordinate (lower resolution array extending to theta)
 
     Returns:
-        T_kSZ: (`NDArray[float]`): kSZ temperature profile [μK]
+        T_kSZ: (`NDArray[float]`): kSZ temperature [μK]
     """
 
     dtheta = theta_use[0]

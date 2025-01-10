@@ -17,7 +17,7 @@ def calc_ds(
     prof: ccl.halos.profile_base.HaloProfile,
 ) -> NDArray[np.float64]:
     """
-    a function to compute the comoving excess surface mass density ($\Delta \Sigma$) profile given a halo profile.
+    a function to compute the comoving excess surface mass density profile given a halo profile.
 
     Args:
         cosmo: (`pyccl.cosmology.Cosmology`): a Cosmology object.
