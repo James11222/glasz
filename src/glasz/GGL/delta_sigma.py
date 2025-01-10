@@ -11,9 +11,9 @@ from .. import constants as const
 
 def calc_ds(
     cosmo: ccl.cosmology.Cosmology,
-    R: np.float64 | NDArray[np.float64],
-    M: np.float64 | NDArray[np.float64],
-    a: np.float64 | NDArray[np.float64],
+    R: float | NDArray[np.float64],
+    M: float | NDArray[np.float64],
+    a: float | NDArray[np.float64],
     prof: ccl.halos.profile_base.HaloProfile,
 ) -> NDArray[np.float64]:
     """

@@ -17,7 +17,7 @@ def calc_xi_mm_2h(
     k_arr: NDArray[np.float64],
     a_arr: NDArray[np.float64],
     r_arr: NDArray[np.float64],
-    a_sf: np.float64,
+    a_sf: float,
 ) -> Callable[[NDArray[np.float64]], NDArray[np.float64]]:
     """
     This function computes the matter-matter 2-halo term of

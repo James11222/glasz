@@ -67,9 +67,9 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter):  # type: ignore[misc]
     def normalize(
         self,
         cosmo: ccl.cosmology.Cosmology,
-        rb: np.float64 | NDArray[np.float64],
-        M: np.float64 | NDArray[np.float64],
-        a: np.float64 | NDArray[np.float64],
+        rb: float | NDArray[np.float64],
+        M: float | NDArray[np.float64],
+        a: float | NDArray[np.float64],
         prof: ccl.halos.profile_base.HaloProfile,
         rmin: float = 1e-16,
         n_steps: int = 1000,
@@ -102,9 +102,9 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter):  # type: ignore[misc]
     def _real(
         self,
         cosmo: ccl.cosmology.Cosmology,
-        r: np.float64 | NDArray[np.float64],
-        M: np.float64 | NDArray[np.float64],
-        a: np.float64 | NDArray[np.float64],
+        r: float | NDArray[np.float64],
+        M: float | NDArray[np.float64],
+        a: float | NDArray[np.float64],
     ) -> NDArray[np.float64]:
         """comoving real space profile in units of [M_sun/Mpc^3].
 
@@ -240,9 +240,9 @@ class MatterProfile(ccl.halos.HaloProfile):  # type: ignore[misc]
     def _real(
         self,
         cosmo: ccl.cosmology.Cosmology,
-        r: np.float64 | NDArray[np.float64],
-        M: np.float64 | NDArray[np.float64],
-        a: np.float64 | NDArray[np.float64],
+        r: float | NDArray[np.float64],
+        M: float | NDArray[np.float64],
+        a: float | NDArray[np.float64],
     ) -> NDArray[np.float64]:
         """Real space profile.
 
