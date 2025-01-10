@@ -202,7 +202,7 @@ wheels = [
 
 [[package]]
 name = "glasz"
-version = "0.1.dev9+g76e1c7f.d20250110"
+version = "0.1.dev11+g3103593.d20250110"
 source = { editable = "." }
 dependencies = [
     { name = "numpy" },
@@ -224,12 +224,8 @@ docs = [
     { name = "sphinx-copybutton" },
 ]
 test = [
-    { name = "numpy" },
-    { name = "pyccl" },
     { name = "pytest" },
     { name = "pytest-cov" },
-    { name = "pyyaml" },
-    { name = "scipy" },
 ]
 
 [package.metadata]
@@ -237,17 +233,13 @@ requires-dist = [
     { name = "furo", marker = "extra == 'docs'", specifier = ">=2023.8.17" },
     { name = "myst-parser", marker = "extra == 'docs'", specifier = ">=0.13" },
     { name = "numpy", specifier = "<2" },
-    { name = "numpy", marker = "extra == 'test'", specifier = "<2" },
     { name = "pyccl", specifier = "==3.1.2" },
-    { name = "pyccl", marker = "extra == 'test'", specifier = "==3.1.2" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=6" },
     { name = "pytest", marker = "extra == 'test'", specifier = ">=6" },
     { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=3" },
     { name = "pytest-cov", marker = "extra == 'test'", specifier = ">=3" },
     { name = "pyyaml" },
-    { name = "pyyaml", marker = "extra == 'test'" },
     { name = "scipy", specifier = "<1.12" },
-    { name = "scipy", marker = "extra == 'test'", specifier = "<1.12" },
     { name = "sphinx", marker = "extra == 'docs'", specifier = ">=7.0" },
     { name = "sphinx-autodoc-typehints", marker = "extra == 'docs'" },
     { name = "sphinx-copybutton", marker = "extra == 'docs'" },
