@@ -1,15 +1,16 @@
 from __future__ import annotations
 
+from collections.abc import Callable
+from typing import Any, Union
+
 import numpy as np
-from scipy.interpolate import interp1d # type: ignore[import-untyped]
+from numpy.typing import NDArray
+from scipy.interpolate import interp1d  # type: ignore[import-untyped]
 
 from .. import constants as const
 from .beam import generate_beam_profile
 from .fht import RadialFourierTransform
 
-from numpy.typing import NDArray
-from typing import Any, Dict, Sequence, Union, cast
-from collections.abc import Callable
 Numeric = Union[np.int32, np.int64, np.float32, np.float64]
 
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
@@ -17,10 +18,12 @@ Numeric = Union[np.int32, np.int64, np.float32, np.float64]
 # # # # # # # # # # # # # # # # # # # # # # # # # # # # # # #
 
 
-def project_density_profile(rho_3D: Callable[[NDArray[Numeric] | Numeric], NDArray[Numeric] | Numeric],
-                            d_A: Numeric, 
-                            los_distance: NDArray[Numeric], 
-                            theta_smooth: NDArray[Numeric]) -> Any:
+def project_density_profile(
+    rho_3D: Callable[[NDArray[Numeric] | Numeric], NDArray[Numeric] | Numeric],
+    d_A: Numeric,
+    los_distance: NDArray[Numeric],
+    theta_smooth: NDArray[Numeric],
+) -> Any:
     """
     A function which takes in a 3D density profile and projects it into a 2D density profile by
     integrating along the line of sight.
@@ -47,11 +50,13 @@ def project_density_profile(rho_3D: Callable[[NDArray[Numeric] | Numeric], NDArr
     )  # g/cm^2
 
 
-def convolve_density_with_beam(rho_2D: Any, 
-                               frequency: str, 
-                               theta_smooth: NDArray[Numeric], 
-                               theta_use: NDArray[Numeric], 
-                               method: str) -> Any:
+def convolve_density_with_beam(
+    rho_2D: Any,
+    frequency: str,
+    theta_smooth: NDArray[Numeric],
+    theta_use: NDArray[Numeric],
+    method: str,
+) -> Any:
     """
     A function which takes in a 2D density profile and convolves it with a beam profile.
 
@@ -132,14 +137,13 @@ def convolve_density_with_beam(rho_2D: Any,
     else:  # pragma: no cover
         msg = "method must be either 'brute_force' or 'hankel'"
         raise ValueError(msg)
-        
 
     return rho_2D_beam
 
 
-def compute_T_kSZ(rho_2D_beam: Any, 
-                  rho_2D_beam_annulus: Any, 
-                  theta_use: NDArray[Numeric]) -> Any:
+def compute_T_kSZ(
+    rho_2D_beam: Any, rho_2D_beam_annulus: Any, theta_use: NDArray[Numeric]
+) -> Any:
     """
     A function which takes in a beam convolved 2D density profile and computes the kSZ temperature profile.
 
@@ -178,14 +182,14 @@ def compute_T_kSZ(rho_2D_beam: Any,
 
 @np.vectorize
 def create_T_kSZ_profile(
-    theta: Numeric, 
-    z: Numeric, 
-    rho_3D: Callable[[NDArray[Numeric] | Numeric], NDArray[Numeric] | Numeric], 
-    frequency: str, 
-    cosmo: Any, 
-    NNR: int=100, 
-    resolution_factor:float=3.0, 
-    method:str="hankel"
+    theta: Numeric,
+    z: Numeric,
+    rho_3D: Callable[[NDArray[Numeric] | Numeric], NDArray[Numeric] | Numeric],
+    frequency: str,
+    cosmo: Any,
+    NNR: int = 100,
+    resolution_factor: float = 3.0,
+    method: str = "hankel",
 ) -> Any:
     """
     This function computes the projected density profile and projects

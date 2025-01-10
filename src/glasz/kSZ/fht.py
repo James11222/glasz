@@ -1,22 +1,23 @@
 from __future__ import annotations
 
+import contextlib
+from collections.abc import Callable
+from typing import Any, Sequence, Union
+
 import numpy as np
 import scipy.fft  # type: ignore[import-untyped]
-
 from numpy.typing import NDArray
-from typing import Any, Dict, List, Sequence, Union
-from collections.abc import Callable
-import contextlib
+
 Numeric = Union[np.int32, np.int64, np.float32, np.float64]
 
 # This class is taken from Pixell, written by Sigurd Naess. We don't need all of pixell
 # for this, so for now we just take the Hankel transform class.
 
+
 class RadialFourierTransform:
-    def __init__(self, 
-                 lrange: Sequence[float] | None = None, 
-                 n: int = 512, 
-                 pad: int = 256):
+    def __init__(
+        self, lrange: Sequence[float] | None = None, n: int = 512, pad: int = 256
+    ):
         """Construct an object for transforming between radially
         symmetric profiles in real-space and fourier space using a
         fast Hankel transform. Aside from being fast, this is also
@@ -55,9 +56,7 @@ class RadialFourierTransform:
         self.r = 1 / self.ell[::-1]
         self.pad = pad
 
-    def real2harm(self, 
-                  rprof: Callable[[NDArray[Numeric]], NDArray[Numeric]]
-                  ) -> Any:
+    def real2harm(self, rprof: Callable[[NDArray[Numeric]], NDArray[Numeric]]) -> Any:
         """Perform a forward (real -> harmonic) transform, taking us from the
         provided real-space radial profile rprof(r) to a harmonic-space profile
         lprof(l). rprof can take two forms:
@@ -73,9 +72,7 @@ class RadialFourierTransform:
             rprof_ = rprof(self.r)
         return 2 * np.pi * scipy.fft.fht(rprof_ * self.r, self.dlog, 0) / self.ell
 
-    def harm2real(self, 
-                  lprof: Callable[[NDArray[Numeric]], NDArray[Numeric]]
-                  ) -> Any:
+    def harm2real(self, lprof: Callable[[NDArray[Numeric]], NDArray[Numeric]]) -> Any:
         """Perform a backward (harmonic -> real) transform, taking us from the
         provided harmonic-space radial profile lprof(l) to a real-space profile
         rprof(r). lprof can take two forms:
@@ -86,13 +83,12 @@ class RadialFourierTransform:
         The transform is done along the last axis of the profile.
         Returns rprof[self.r]. This includes padding, which can be removed
         using self.unpad"""
-        
 
         with contextlib.suppress(TypeError):
             lprof_ = lprof(self.ell)
         return scipy.fft.ifht(lprof_ / (2 * np.pi) * self.ell, self.dlog, 0) / self.r
 
-    def unpad(self, *arrs: NDArray[Numeric]) -> Any: 
+    def unpad(self, *arrs: NDArray[Numeric]) -> Any:
         """Remove the padding from arrays used by this object. The
         values in the padded areas of the output of the transform have
         unreliable values, but they're not cropped automatically to
