@@ -26,7 +26,6 @@ classifiers = [
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.13",
   "Topic :: Scientific/Engineering",
   "Typing :: Typed",
 ]
@@ -136,7 +135,6 @@ ignore = [
   "NPY201",   # numpy > 2.0 not supported
   "F403",     # 'from module import *' used; unable to detect undefined names
   "UP008",    # Super function in classes
-  "RUF001",   # Greek Letters
   "E731",     # Do not assign a lambda expression, use a def
 ]
 isort.required-imports = ["from __future__ import annotations"]

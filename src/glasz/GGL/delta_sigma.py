@@ -27,7 +27,7 @@ def calc_ds(
         prof: (`pyccl.halos.profiles.profile_base.HaloProfile`): halo profile.
 
     Returns:
-        ds: (`float` or `NDArray[float]`): comoving excess surface mass density ($\Delta \Sigma$)
+        ds: (`float` or `NDArray[float]`): comoving excess surface mass density
     """
 
     prof.update_precision_fftlog(
