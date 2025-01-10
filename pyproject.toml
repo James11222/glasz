@@ -134,6 +134,7 @@ ignore = [
   "ISC001",   # Conflicts with formatter
   "NPY201",   # numpy > 2.0 not supported
   "F403",     # 'from module import *' used; unable to detect undefined names
+  "UP008",    # Super function in classes
 ]
 isort.required-imports = ["from __future__ import annotations"]
 # Uncomment if using a _compat.typing backport

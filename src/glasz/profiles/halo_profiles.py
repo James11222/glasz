@@ -1,23 +1,24 @@
 from __future__ import annotations
 
-import numpy as np
-import pyccl as ccl # type: ignore[import-untyped]
-import scipy.integrate # type: ignore[import-untyped]
-
-from numpy.typing import NDArray
 from collections.abc import Callable
 from typing import Any, cast
 
-class HaloProfileGNFW(ccl.halos.HaloProfileMatter): # type: ignore[misc]
+import numpy as np
+import pyccl as ccl  # type: ignore[import-untyped]
+import scipy.integrate  # type: ignore[import-untyped]
+from numpy.typing import NDArray
+
+
+class HaloProfileGNFW(ccl.halos.HaloProfileMatter):  # type: ignore[misc]
     """
-    Generalized NFW Density Profile. This class implements the 
-    generalized NFW profile as described in Zhao et al. 1996. 
+    Generalized NFW Density Profile. This class implements the
+    generalized NFW profile as described in Zhao et al. 1996.
     (https://arxiv.org/pdf/astro-ph/9509122). The profile is
     defined as:
 
     $$\rho_{\rm GNFW}(r) = \rho_0 \left(\frac{x}{x_c}\right)^{-\gamma} \left( 1 + \left( \frac{x}{x_c} \right)^{1/\alpha} \right)^{-(\beta - \gamma) \alpha}$$
 
-    where $x = r/r_{200c}$, $r_{200c}$ is the comoving 200c radius. The profile can be 
+    where $x = r/r_{200c}$, $r_{200c}$ is the comoving 200c radius. The profile can be
     truncated according to whatever mass definition is used. The profile can also be
     normalized to enforce cosmic baryon abundance at a given radius.
     """
@@ -63,14 +64,16 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter): # type: ignore[misc]
         self.rho_2h = rho_2h
         self.version = version
 
-    def normalize(self, 
-                  cosmo: ccl.cosmology.Cosmology, 
-                  rb: np.float64 | NDArray[np.float64], 
-                  M: np.float64 | NDArray[np.float64], 
-                  a: np.float64 | NDArray[np.float64], 
-                  prof: ccl.halos.profile_base.HaloProfile, 
-                  rmin: float = 1e-16, 
-                  n_steps: int = 1000) -> None:
+    def normalize(
+        self,
+        cosmo: ccl.cosmology.Cosmology,
+        rb: np.float64 | NDArray[np.float64],
+        M: np.float64 | NDArray[np.float64],
+        a: np.float64 | NDArray[np.float64],
+        prof: ccl.halos.profile_base.HaloProfile,
+        rmin: float = 1e-16,
+        n_steps: int = 1000,
+    ) -> None:
         """
         compute the value of $\rho_0$ for the GNFW profile by
         enforcing a sphere of radius $r_b$ to have cosmic abundance of
@@ -96,11 +99,13 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter): # type: ignore[misc]
 
         self.rho0 = numerator / denominator
 
-    def _real(self, 
-              cosmo: ccl.cosmology.Cosmology, 
-              r: np.float64 | NDArray[np.float64],
-              M: np.float64 | NDArray[np.float64], 
-              a: np.float64 | NDArray[np.float64]) -> NDArray[np.float64]:
+    def _real(
+        self,
+        cosmo: ccl.cosmology.Cosmology,
+        r: np.float64 | NDArray[np.float64],
+        M: np.float64 | NDArray[np.float64],
+        a: np.float64 | NDArray[np.float64],
+    ) -> NDArray[np.float64]:
         """comoving real space profile in units of [M_sun/Mpc^3].
 
         Args:
@@ -127,7 +132,7 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter): # type: ignore[misc]
             gamma = self.gamma
             x_c = self.x_c
 
-        elif self.feedback_model == "AGN": 
+        elif self.feedback_model == "AGN":
             # These relations were fit using the
             # Battaglia16 version of the GNFW profile
             self.version = "Battaglia16"
@@ -204,16 +209,17 @@ class HaloProfileGNFW(ccl.halos.HaloProfileMatter): # type: ignore[misc]
             prof = np.squeeze(prof, axis=-1)
         if np.ndim(M) == 0:
             prof = np.squeeze(prof, axis=0)
-            
+
         return cast(NDArray[np.float64], prof)
 
 
-class MatterProfile(ccl.halos.HaloProfile): # type: ignore[misc]
-    def __init__(self, 
-                 mass_def: ccl.halos.MassDef, 
-                 concentration: ccl.halos.concentration, 
-                 rho_2h: Callable[[NDArray[np.float64]], NDArray[np.float64]] | None = None
-                 ):
+class MatterProfile(ccl.halos.HaloProfile):  # type: ignore[misc]
+    def __init__(
+        self,
+        mass_def: ccl.halos.MassDef,
+        concentration: ccl.halos.concentration,
+        rho_2h: Callable[[NDArray[np.float64]], NDArray[np.float64]] | None = None,
+    ):
         super(MatterProfile, self).__init__(
             mass_def=mass_def, concentration=concentration
         )
@@ -231,11 +237,13 @@ class MatterProfile(ccl.halos.HaloProfile): # type: ignore[misc]
             cumul2d_analytic=True,
         )
 
-    def _real(self, 
-              cosmo: ccl.cosmology.Cosmology, 
-              r: np.float64 | NDArray[np.float64],
-              M: np.float64 | NDArray[np.float64], 
-              a: np.float64 | NDArray[np.float64]) -> NDArray[np.float64]:
+    def _real(
+        self,
+        cosmo: ccl.cosmology.Cosmology,
+        r: np.float64 | NDArray[np.float64],
+        M: np.float64 | NDArray[np.float64],
+        a: np.float64 | NDArray[np.float64],
+    ) -> NDArray[np.float64]:
         """Real space profile.
 
          Args:

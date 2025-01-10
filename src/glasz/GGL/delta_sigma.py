@@ -9,11 +9,13 @@ from numpy.typing import NDArray
 from .. import constants as const
 
 
-def calc_ds(cosmo:ccl.cosmology.Cosmology, 
-            R: np.float64 | NDArray[np.float64], 
-            M: np.float64 | NDArray[np.float64], 
-            a: np.float64 | NDArray[np.float64], 
-            prof: ccl.halos.profile_base.HaloProfile) -> NDArray[np.float64]:
+def calc_ds(
+    cosmo: ccl.cosmology.Cosmology,
+    R: np.float64 | NDArray[np.float64],
+    M: np.float64 | NDArray[np.float64],
+    a: np.float64 | NDArray[np.float64],
+    prof: ccl.halos.profile_base.HaloProfile,
+) -> NDArray[np.float64]:
     """
     a function to compute the comoving excess surface mass density ($\Delta \Sigma$) profile given a halo profile.
 
