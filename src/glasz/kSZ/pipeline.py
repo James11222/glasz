@@ -54,7 +54,7 @@ def convolve_density_with_beam(
     frequency: str,
     theta_smooth: NDArray[np.float64],
     theta_use: NDArray[np.float64],
-    method: str,
+    method: str = "hankel",
 ) -> NDArray[np.float64]:
     """
     A function which takes in a 2D density profile and convolves it with a beam profile.
@@ -70,7 +70,31 @@ def convolve_density_with_beam(
         rho_2D_beam: (`NDArray[float]`): 2D density profile convolved with beam [units of g/cm^2]
     """
 
-    if method == "brute_force":
+    if method == "hankel":
+        """
+        This method performs a convolution of the 2D density profile with the beam profile
+        using the Fast-Hankel transform. This method is computationally efficient and should be used
+        in MCMC.
+        """
+
+        f_beam = generate_beam_profile(frequency, space="harmonic")
+
+        rht = RadialFourierTransform(n=200, pad=100, lrange=[170, 1.4e6])
+
+        _rho_2D = np.interp(rht.r, theta_smooth, rho_2D)
+        _rho_2D_ell = rht.real2harm(_rho_2D)
+        _rho_2D_beam = rht.harm2real(_rho_2D_ell * f_beam(rht.ell))
+        _r_unpad, _rho_2D_beam = rht.unpad(rht.r, _rho_2D_beam)
+
+        rho_2D_beam = interp1d(
+            _r_unpad.flatten(),
+            _rho_2D_beam.flatten(),
+            kind="linear",
+            bounds_error=False,
+            fill_value=0.0,
+        )(theta_use)
+
+    elif method == "brute_force":
         """
         This method performs a brute force convolution of the 2D density profile with the beam profile
         using the form of a cylindrical convolution. This method is computationally expensive and should
@@ -100,30 +124,6 @@ def convolve_density_with_beam(
 
         _rho_2D_beam = np.trapz(integrand, x=phi_, axis=2)
         rho_2D_beam = np.trapz(_rho_2D_beam, x=theta_smooth, axis=1)
-
-    elif method == "hankel":
-        """
-        This method performs a convolution of the 2D density profile with the beam profile
-        using the Fast-Hankel transform. This method is computationally efficient and should be used
-        in MCMC.
-        """
-
-        f_beam = generate_beam_profile(frequency, space="harmonic")
-
-        rht = RadialFourierTransform(n=200, pad=100, lrange=[170, 1.4e6])
-
-        _rho_2D = np.interp(rht.r, theta_smooth, rho_2D)
-        _rho_2D_ell = rht.real2harm(_rho_2D)
-        _rho_2D_beam = rht.harm2real(_rho_2D_ell * f_beam(rht.ell))
-        _r_unpad, _rho_2D_beam = rht.unpad(rht.r, _rho_2D_beam)
-
-        rho_2D_beam = interp1d(
-            _r_unpad.flatten(),
-            _rho_2D_beam.flatten(),
-            kind="linear",
-            bounds_error=False,
-            fill_value=0.0,
-        )(theta_use)
 
     else:  # pragma: no cover
         msg = "method must be either 'brute_force' or 'hankel'"

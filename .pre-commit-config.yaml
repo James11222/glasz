@@ -58,7 +58,7 @@ repos:
           - pytest
           - numpy
           - scipy
-          - pyccl==3.1.2
+          - pyccl>=3.1.2
 
   - repo: https://github.com/codespell-project/codespell
     rev: "v2.3.0"

@@ -51,15 +51,19 @@ jobs:
           python-version: ${{ matrix.python-version }}
           allow-prereleases: true
 
-      - name: Install package
-        run: python -m pip install .[test]
+      - uses: prefix-dev/setup-pixi@v0.8.1
+        with:
+          pixi-version: v0.41.0
 
       - name: Test package
-        run: >-
-          python -m pytest -ra --cov --cov-report=xml --cov-report=term
-          --durations=20
+        run: pixi run pytest --cov --cov-report=xml
 
-      # - name: Upload coverage report
-      #   uses: codecov/codecov-action@v4.5.0
-      #   with:
-      #     token: ${{ secrets.CODECOV_TOKEN }}
+      - name: Create conda environment files
+        run:
+          pixi project export conda-explicit-spec conda_env_files
+          --ignore-pypi-errors
+
+      - name: Upload coverage report
+        uses: codecov/codecov-action@v4.5.0
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}

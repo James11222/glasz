@@ -79,17 +79,17 @@ def generate_beam_profile(
 
     if space == "real":
         # define theta array used for interpolation
-        theta = np.linspace(0, 100, 1000) * np.radians(1 / 60)  # radians
+        theta_ = np.linspace(0, 100, 1000) * np.radians(1 / 60)  # radians
 
         # generate profile
-        profile = beam_transform_to_profile(B_ell, theta)
+        profile = beam_transform_to_profile(B_ell, theta_)
 
         # normalize the profile
-        integral = np.trapz(profile * 2 * np.pi * theta, x=theta)
+        integral = np.trapz(profile * 2 * np.pi * theta_, x=theta_)
 
         # interpolate the profile
         def profile_func(theta: NDArray[np.float64]) -> NDArray[np.float64]:
-            return np.interp(theta, theta, profile / integral, period=np.pi)
+            return np.interp(theta, theta_, profile / integral, period=np.pi)
 
     elif space == "harmonic":
         profile_func = interp1d(
