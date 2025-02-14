@@ -160,3 +160,7 @@ Thumbs.db
 # UV
 uv.lock
 .venv
+
+# pixi
+.pixi 
+pixi.lock
