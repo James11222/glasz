@@ -1,10 +1,10 @@
 # glasz
 
 [![Actions Status][actions-badge]][actions-link]
+[![codecov](https://codecov.io/gh/James11222/glasz/graph/badge.svg?token=wPP0VytjPl)](https://codecov.io/gh/James11222/glasz)
 [![Documentation Status][rtd-badge]][rtd-link]
 
 [![PyPI version][pypi-version]][pypi-link]
-[![Conda-Forge][conda-badge]][conda-link]
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
 [![GitHub Discussion][github-discussions-badge]][github-discussions-link]
