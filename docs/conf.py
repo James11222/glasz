@@ -6,7 +6,8 @@ from typing import Any
 project = "glasz"
 copyright = "2025, James Sunseri"
 author = "James Sunseri"
-version = release = importlib.metadata.version("glasz")
+# version = release = importlib.metadata.version("glasz")
+version = release = "0.1.0"
 
 extensions = [
     "myst_parser",
@@ -16,6 +17,8 @@ extensions = [
     "sphinx.ext.napoleon",
     "sphinx_autodoc_typehints",
     "sphinx_copybutton",
+    "nbsphinx",
+    "IPython.sphinxext.ipython_console_highlighting",
 ]
 
 source_suffix = [".rst", ".md"]
@@ -30,9 +33,11 @@ exclude_patterns = [
 
 html_theme = "furo"
 
+html_static_path = ["_static"]
+
 html_theme_options: dict[str, Any] = {
     "footer_icons": [
-        {
+        {   
             "name": "GitHub",
             "url": "https://github.com/James11222/glasz",
             "html": """
@@ -46,6 +51,8 @@ html_theme_options: dict[str, Any] = {
     "source_repository": "https://github.com/James11222/glasz",
     "source_branch": "main",
     "source_directory": "docs/",
+    "light_logo": "title_logo_light_mode.png",
+    "dark_logo": "title_logo_dark_mode.png",
 }
 
 myst_enable_extensions = [

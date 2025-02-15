@@ -186,38 +186,28 @@ def test_kSZ_convolution():
     assert T_kSZ_f150_bf is not None
 
     assert np.all(T_kSZ_f150_hankel >= 0)
-    # assert np.all(T_kSZ_f150_bf >= 0)
+    assert np.all(T_kSZ_f150_bf >= 0)
 
     assert np.all(np.isfinite(T_kSZ_f150_hankel))
-    # assert np.all(np.isfinite(T_kSZ_f150_bf))
+    assert np.all(np.isfinite(T_kSZ_f150_bf))
 
-    # assert np.all(np.abs((T_kSZ_f150_hankel / T_kSZ_f150_bf) - 1) < 0.15)
+    assert np.all(np.abs((T_kSZ_f150_hankel / T_kSZ_f150_bf) - 1) < 0.15)
 
     T_kSZ_f090_hankel = glasz.kSZ.create_T_kSZ_profile(
         theta, z_lens, rho_3D, frequency="f090", cosmo=cosmo, method="hankel"
     )
 
-    # T_kSZ_f090_bf = glasz.kSZ.create_T_kSZ_profile(
-    #     theta, z_lens, rho_3D, frequency="f090", cosmo=cosmo, method="brute_force"
-    # )
+    T_kSZ_f090_bf = glasz.kSZ.create_T_kSZ_profile(
+        theta, z_lens, rho_3D, frequency="f090", cosmo=cosmo, method="brute_force"
+    )
 
     assert T_kSZ_f090_hankel is not None
-    # assert T_kSZ_f090_bf is not None
+    assert T_kSZ_f090_bf is not None
 
     assert np.all(T_kSZ_f090_hankel >= 0)
-    # assert np.all(T_kSZ_f090_bf >= 0)
+    assert np.all(T_kSZ_f090_bf >= 0)
 
     assert np.all(np.isfinite(T_kSZ_f090_hankel))
-    # assert np.all(np.isfinite(T_kSZ_f090_bf))
+    assert np.all(np.isfinite(T_kSZ_f090_bf))
 
-    # assert np.all(np.abs((T_kSZ_f090_hankel / T_kSZ_f090_bf) - 1) < 0.15)
-
-
-# def test_beam():
-#     f_beam = glasz.kSZ.generate_beam_profile('f150', 'real')
-
-#     thetas = np.geomspace(0.5, 6.5, 50)  # arcmins
-
-#     assert f_beam(thetas) is not None
-#     assert np.all(f_beam(thetas) >= 0)
-#     assert np.all(np.isfinite(f_beam(thetas)))
+    assert np.all(np.abs((T_kSZ_f090_hankel / T_kSZ_f090_bf) - 1) < 0.15)
