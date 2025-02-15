@@ -30,7 +30,7 @@ classifiers = [
   "Typing :: Typed",
 ]
 dynamic = ["version"]
-dependencies = ["pyccl", "numpy<2", "scipy<=1.11", "pyyaml", "camb"]
+dependencies = ["pyccl", "numpy<2", "scipy", "pyyaml", "camb"]
 
 [project.optional-dependencies]
 test = [
