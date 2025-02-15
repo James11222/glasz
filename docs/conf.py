@@ -32,8 +32,6 @@ exclude_patterns = [
 
 html_theme = "furo"
 
-html_static_path = ["_static"]
-
 html_theme_options: dict[str, Any] = {
     "footer_icons": [
         {
@@ -50,6 +48,10 @@ html_theme_options: dict[str, Any] = {
     "source_repository": "https://github.com/James11222/glasz",
     "source_branch": "main",
     "source_directory": "docs/",
+}
+
+html_static_path = ["_static"]
+html_theme_options = {
     "light_logo": "title_logo_light_mode.png",
     "dark_logo": "title_logo_dark_mode.png",
 }
