@@ -7,7 +7,10 @@
 ![PyPI - Version](https://img.shields.io/pypi/v/glasz)
 ![PyPI - Python Version](https://img.shields.io/pypi/pyversions/glasz)
 
-**glasz** is a package designed to aid in joint analyses of kSZ+GGL. For more information, please read Sunseri et al. 2025 (in prep). This code is built on `pyccl` and was derived from the work done in [Amodeo et al. 2021](https://arxiv.org/pdf/2009.05558).
+**glasz** is a package designed to aid in joint analyses of kSZ+GGL. For more
+information, please read Sunseri et al. 2025 (in prep). This code is built on
+`pyccl` and was derived from the work done in
+[Amodeo et al. 2021](https://arxiv.org/pdf/2009.05558).
 
 Authors: James Sunseri
 

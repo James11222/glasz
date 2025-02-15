@@ -1,4 +1,6 @@
-# preamble 
+# preamble
+from __future__ import annotations
+
 import numpy as np
 import pyccl as ccl
 
@@ -15,12 +17,12 @@ cosmo = ccl.Cosmology(Omega_c=Omega_c, Omega_b=Omega_b, h=h, sigma8=sigma8, n_s=
 z_lens = 0.55  # Mean z for CMASS
 a_sf = 1 / (1 + z_lens)
 
-fb = cosmo["Omega_b"] / cosmo["Omega_m"] # Baryon fraction
-fc = cosmo["Omega_c"] / cosmo["Omega_m"] # CDM fraction
+fb = cosmo["Omega_b"] / cosmo["Omega_m"]  # Baryon fraction
+fc = cosmo["Omega_c"] / cosmo["Omega_m"]  # CDM fraction
 
-k_arr = np.geomspace(1e-4, 1e4, 128) # Wavenumber array
-a_arr = np.linspace(0.1, 1, 16) # Scale factor array
-r_arr = np.geomspace(1e-2, 1e2, 100) # Distance array
+k_arr = np.geomspace(1e-4, 1e4, 128)  # Wavenumber array
+a_arr = np.linspace(0.1, 1, 16)  # Scale factor array
+r_arr = np.geomspace(1e-2, 1e2, 100)  # Distance array
 
 # bounds we choose for our mass integral
 M_min = 1e10
@@ -49,4 +51,3 @@ hmc = ccl.halos.HMCalculator(
     log10M_max=np.log10(M_max),
     nM=num_mass,
 )
-

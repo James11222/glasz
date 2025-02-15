@@ -26,7 +26,6 @@
 
 <!-- prettier-ignore-end -->
 
-
 # Installation
 
 This package is installable via `pip`. All one has to do is run

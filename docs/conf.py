@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import importlib.metadata
 from typing import Any
 
 project = "glasz"
@@ -37,7 +36,7 @@ html_static_path = ["_static"]
 
 html_theme_options: dict[str, Any] = {
     "footer_icons": [
-        {   
+        {
             "name": "GitHub",
             "url": "https://github.com/James11222/glasz",
             "html": """
