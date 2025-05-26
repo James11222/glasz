@@ -46,7 +46,8 @@ take long. From there, in this repository run the `pixi install` command and you
 will gain a `pixi` environment with this package installed including all of its
 dependencies. If you are not familiar with `pixi`, you can use the precomputed
 `pixi.lock` file to resolve all dependencies in the creation or modification of
-a `conda` environment. You can do this on your machine by running the following command
+a `conda` environment. You can do this on your machine by running the following
+command
 
 ```
 $ pixi project export conda-explicit-spec conda_env_files --ignore-pypi-errors
