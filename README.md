@@ -1,13 +1,12 @@
 # glasz
 
-[![Actions Status][actions-badge]][actions-link]
 [![codecov](https://codecov.io/gh/James11222/glasz/graph/badge.svg?token=wPP0VytjPl)](https://codecov.io/gh/James11222/glasz)
 [![Documentation Status][rtd-badge]][rtd-link]
 
 [![PyPI version][pypi-version]][pypi-link]
 [![PyPI platforms][pypi-platforms]][pypi-link]
 
-[![GitHub Discussion][github-discussions-badge]][github-discussions-link]
+[![DOI](https://zenodo.org/badge/914591138.svg)](https://doi.org/10.5281/zenodo.18356051)
 
 <!-- SPHINX-START -->
 
